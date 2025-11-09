@@ -5,8 +5,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import de.BibSoft.data.Book;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
+@RequestMapping("/book")
 public class BookController {
 	
 	@RequestMapping("/greeting")
