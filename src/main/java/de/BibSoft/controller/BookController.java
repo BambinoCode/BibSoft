@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@RequestMapping("/book")
 public class BookController {
 	
 	@RequestMapping("/greeting")
@@ -18,7 +17,7 @@ public class BookController {
 		String greeting = "Hallo Welt";
 		
 		model.addAttribute("greeting", "Hallo Welt!");
-		model.addAttribute("books", new Book());  //@TODO: Falls: einzige fehlerquelle
+		model.addAttribute("books", new Book());
 		
 		return "index";
 		
@@ -28,15 +27,14 @@ public class BookController {
 		
 		model.addAttribute("book", "Hallo Welt!");
 		
-		return "showBook";
-		
+		return "book/showBook";
 	}
 	@RequestMapping("/editBook")
 	public String editBook(Model model) {
 		
 		model.addAttribute("book", "Hallo Welt!");
 		
-		return "editBook";
+		return "book/editBook";
 		
 	}
 	
@@ -44,6 +42,6 @@ public class BookController {
 	public String deleteBook(Model model) {
 		model.addAttribute("book", "Hallo Welt!");
 		
-		return "deleteBook";
+		return "book/deleteBook";
 	}
 }

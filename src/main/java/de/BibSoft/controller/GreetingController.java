@@ -3,14 +3,16 @@ package de.BibSoft.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/book")
 public class GreetingController {
 	
-	@GetMapping("/greeting")
+	@GetMapping("/show")
 	public String greetingForm(Model model) {
 		model.addAttribute("greeting", "Hallo Welt!");
-		return "greeting";
+		return "showBook";
 	}
 
 //	@PostMapping("/greeting")
