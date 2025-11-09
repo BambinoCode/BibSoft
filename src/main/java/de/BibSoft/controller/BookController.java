@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import de.BibSoft.data.Book;
+
 @Controller
 public class BookController {
 	
@@ -12,6 +14,7 @@ public class BookController {
 		String greeting = "Hallo Welt";
 		
 		model.addAttribute("greeting", "Hallo Welt!");
+		model.addAttribute("books", new Book());  //@TODO: Falls: einzige fehlerquelle
 		
 		return "index";
 		

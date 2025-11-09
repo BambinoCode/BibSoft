@@ -15,7 +15,7 @@ public class Book {
 	private String dateiname;
 	private String dateiendung;
 	
-	private Book(){};
+	public Book(){};
 	
 	public Book(String speicherort, String dateiname, String dateiendung) {
 		this.speicherort = speicherort;
