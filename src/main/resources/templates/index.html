@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+	<head> 
+	    <title>Getting Started: Handling Form Submission</title>
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		
+		<p th:text="${greeting}"/>
+		<h1>Form</h1>
+		
+		<table>
+			<thead>
+				<tr>
+					<th>speicherort</th>
+					<th>Dateiname</th>
+					<th>Dateiendung</th>
+					
+					<th>Anzeigen</th>
+					<th>Bearbeiten</th>
+					<th>Löschen</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr>
+					<td>Speicherort</td>
+					<td>Dateiname</td>
+					<td>Dateiendung</td>
+					
+					<td><a href="/editBook">Anzeigen</a></td>
+					<td><a href="/editBook">Bearbeiten</a></td>
+					<td><a href="/editBook">Löschen</a></td>
+				</tr>
+			</tbody>
+		</table>
+		
+	</body>
+</html>
