@@ -1,0 +1,32 @@
+<!DOCTYPE HTML> 
+<html xmlns:th="https://www.thymeleaf.org">
+	<head> <meta charset="UTF-8">
+		<title>New Book</title>
+	</head>
+	
+	<body>
+		<h1>Neues Buch eintragen</h1>
+		<p th:text="${greeting}"/>
+		
+		<form action="/book/new" th:methode="post" th:object="${bookForm}">
+			<div>
+				<label for="speicherort">Speicherort: </label>
+				<input type="text" th:field="*{speicherort}" placeholder = "Speicherort"/>
+			</div>
+			
+			<div>
+				<label> Dateiname: </label>
+				<input type="text" th:field="*{dateiname}" placeholder = "Dateiname"/>
+			</div>
+			
+			<div>
+				<label> Dateiendung: </label>
+				<input id="dateiendung" type="text" th:field="*{dateiendung}" placeholder = "Dateiendung"/>
+			</div>
+			
+			<button type="submit">Erstellen</button>
+			<button type = "reset">Reset</button>
+		</form>
+	</body>
+	
+</html>

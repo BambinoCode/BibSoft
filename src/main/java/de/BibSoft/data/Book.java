@@ -1,18 +1,26 @@
 package de.BibSoft.data;
 
+import org.springframework.data.relational.core.mapping.Column;
+
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
 
 @Entity
+@Table(name="Bücher")
 public class Book {
 	
-	@jakarta.persistence.Id
+	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private String Id;
+	private Long Id;
+	@Column
 	private String speicherort;
+	@Column
 	private String dateiname;
+	@Column
 	private String dateiendung;
 	
 	public Book(){};
@@ -23,10 +31,10 @@ public class Book {
 		this.dateiendung = dateiendung;
 	}
 	
-	public String getId() {
+	public Long getId() {
 		return Id;
 	}
-	public void setId(String id) {
+	public void setId(Long id) {
 		Id = id;
 	}
 	
