@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,20 +20,20 @@ import de.BibSoft.data.Book;
 import de.BibSoft.service.BookService;
 
 
-
 @Controller
+@Validated
 public class GreetingController {
 	
 	@Autowired
 	BookService bookService;
 	
 	@GetMapping("/")
-	public String getIndes(){
+	public String getIndex(){
 		bookService.saveBook(new Book("Speicherort","Buch Dateiname", "PDF"));
 		return "redirect:/greeting";
 	}
 	
-	@RequestMapping("/greeting")
+	@GetMapping("/greeting")
 	public String greeting(Model model) {
 		
 		model.addAttribute("greeting", "Hallo Welt!");
@@ -41,15 +43,16 @@ public class GreetingController {
 		
 	}
 	
-	@RequestMapping("/book/show")
+	@GetMapping("/book/show")
 	public String showBook(Model model) {
 		
 		model.addAttribute("greeting", "Hallo Welt! Show Book");
 		model.addAttribute("titel", "Show Book");
 		model.addAttribute("book", new Book());
 		
-		return "/book/show";
+		return "book/show";
 	}
+	
 //-----------------------------------------------------------------------------
 	@GetMapping("/book/new")
 	public String newBook(Model model) {
@@ -60,30 +63,32 @@ public class GreetingController {
 		return "book/new";
 	}
 	
-	@PostMapping("/book/new")
-	public String saveBook(@ModelAttribute Book bookform, Model model) {
+	@PostMapping("/book/save")
+	public String saveBook(@ModelAttribute Book bookform, Model model, BindingResult result) {
+		if(result.hasErrors()) {
+		    return "book/new"; // Formular erneut zeigen
+		}
 		
-		model.addAttribute("greeting", "Hallo Welt save!");
 		bookService.saveBook(bookform);
 		
-		
-		return "/greeting";
+		return "redirect:/";
 	}
-	
+
 //-----------------------------------------------------------------------------
 	
 	@PostMapping("/book/edit")
 	public String editBook(Model model) {
 		
-		model.addAttribute("book", "Hallo Welt!");
+		model.addAttribute("greeting", "Hallo Welt! Edit");
+		model.addAttribute("book", new Book());
 		
 		return "book/edit";
 		
 	}
 	
 	@DeleteMapping("/book/delete/{id}")
-	public ResponseEntity<Object> deleteBook(@PathVariable("id") Long id) {
-		if(bookService.bookExistById(id)) {
+	public ResponseEntity<Object> deleteBook(@PathVariable Long id) {
+		if(bookService.bookExistsById(id)) {
 			bookService.deleteBookById(id);
 			
 			return ResponseEntity.ok().build();
@@ -92,5 +97,4 @@ public class GreetingController {
 		}
 	}
 	
-
 }

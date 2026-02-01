@@ -1,6 +1,6 @@
 package de.BibSoft.data;
 
-import org.springframework.data.relational.core.mapping.Column;
+import jakarta.persistence.Column;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -10,12 +10,13 @@ import jakarta.persistence.GenerationType;
 
 
 @Entity
-@Table(name="Bücher")
+@Table(name="buecher")
 public class Book {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long Id;
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	private Long id;
+
 	@Column
 	private String speicherort;
 	@Column
@@ -32,12 +33,12 @@ public class Book {
 	}
 	
 	public Long getId() {
-		return Id;
+		return id;
 	}
+
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
-	
 	public String getSpeicherort() {
 		return speicherort;
 	}

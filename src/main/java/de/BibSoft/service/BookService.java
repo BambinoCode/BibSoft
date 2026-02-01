@@ -27,13 +27,15 @@ public class BookService {
 	
 	public void saveBook(Book book) {
 		bookRepo.save(book);
+		
+		//return bookRepo.save(book);
 	}
 	
 	public void deleteBookById(Long id) {
 		bookRepo.deleteById(id);
 	}
 	
-	public boolean bookExistById(Long id) {
+	public boolean bookExistsById(Long id) {
 		return bookRepo.existsById(id);
 	}
 
