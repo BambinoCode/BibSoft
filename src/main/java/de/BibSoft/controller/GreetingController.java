@@ -86,15 +86,17 @@ public class GreetingController {
 		
 	}
 	
-	@DeleteMapping("/book/delete/{id}")
-	public ResponseEntity<Object> deleteBook(@PathVariable Long id) {
+	@GetMapping("/book/delete/{id}")
+	public String deleteBook(@PathVariable("id") Long id) {
 		if(bookService.bookExistsById(id)) {
 			bookService.deleteBookById(id);
 			
-			return ResponseEntity.ok().build();
+			//return ResponseEntity.ok().build();
 		}else {
-			return ResponseEntity.notFound().build();
+			//return ResponseEntity.notFound().build();
 		}
+		
+		return "redirect:/";
 	}
 	
 }

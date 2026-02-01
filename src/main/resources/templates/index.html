@@ -34,17 +34,7 @@
 				<tr>
 					<td><a href="/book/new">Neues Buch</a></td>
 				</tr>
-				<tr>
 				
-					<td>ID</td>
-					<td>Speicherort</td>
-					<td>Dateiname</td>
-					<td>Dateiendung</td>
-					
-					<td><a href="/book/show">Anzeigen</a></td>
-					<td><a href="/editBook">Bearbeiten</a></td>
-					<td><a href="/deletBook">Löschen</a></td>
-				</tr>
 				<tr th:each="book : ${books}">
 					<td th:text="${book.id}">ID</td>
 					<td th:text="${book.speicherort}">Speicherort</td>
@@ -53,8 +43,9 @@
 					
 					<td><a href="/book/show/${book.id}">Anzeigen</a></td>
 					<td><a href="/book/edit">Bearbeiten</a></td>
-					<td><a th:href="@{/book/delete/book.id}">Löschen</a></td>
+					<td><a th:href="@{/book/delete/{id}(id=${book.id})}">Löschen</a></td>
 				</tr>
+				
 				<tr>
 					<td><a href="/book/new">Neues Buch</a></td>
 				</tr>
