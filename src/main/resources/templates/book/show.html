@@ -12,29 +12,32 @@
 	</head>
 	<body>
 		<p th:text="${greeting}"/>
-		<h1 th:text="${titel}"/>
+		<p th:text="${titel}"/>
+		
 		
 		<div th:if="${not #lists.isEmpty(book)}">
 			<div>
 				<label for="id">Id: </label>
-				<input id="id" type="text" th:text="${book.id}"/>
+				<input id="id" type="text" th:field="${book.id}"/>
 			</div>
 			
 			<div>
 				<label for="speicherort">Speicherort: </label>
-				<input id="speicherort" type="text" th:text="${book.speicherort}"/>
+				<input id="speicherort" type="text" th:field="${book.speicherort}"/>
 			</div>
 			
 			<div>
 				<label> Dateiname: </label>
-				<input id="dateiname" type="text" placeholder = "Dateiname" th:text="${book.dateiname}"/>
+				<input id="dateiname" type="text" th:field="${book.dateiname}"/>
 			</div>
 			
 			<div>
 				<label> Dateiendung: </label>
-				<input id="dateiendung" type="text" placeholder = "Dateiendung" th:text="${book.dateiendung}"/>
+				<input id="dateiendung" type="text" th:field="${book.dateiendung}"/>
 			</div>
 		</div>
+		
+		<a th:href="@{/}">Zurück zur Übersicht</a>
 
 	</body>
 </html>

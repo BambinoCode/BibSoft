@@ -14,16 +14,21 @@
 			<div>
 				<label for="speicherort">Speicherort: </label>
 				<input type="text" th:field="*{speicherort}" placeholder = "Speicherort" required />
+				<div th:if="${#fields.hasErrors('speicherort')}" th:errors="*{speicherort}"></div>
 			</div>
 			
 			<div>
 				<label> Dateiname: </label>
 				<input type="text" th:field="*{dateiname}" placeholder = "Dateiname"/>
+				
+				<div th:if="${#fields.hasErrors('dateiname')}" th:errors="*{dateiname}"></div>
 			</div>
 			
 			<div>
 				<label> Dateiendung: </label>
 				<input id="dateiendung" type="text" th:field="*{dateiendung}" placeholder = "Dateiendung"/>
+				
+				<div th:if="${#fields.hasErrors('dateiendung')}" th:errors="*{dateiendung}"></div>
 			</div>
 			
 			<button type="submit">Erstellen</button>

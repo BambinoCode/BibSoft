@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="https://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
 		<title>Edit Book</title>
 	</head>
 	<body>
-	
+		<p th:text="${greeting}"/>
+		<p th:text="${titel}"/>
+			
+		<form action="#" th:action="@{/book/update/{id}(id=${book.id})}" th:object="${book}" method="post">
+			<div>
+			    <label for="speicherort">Speicherort</label>
+			    <input type="text" th:field="*{speicherort}" id="speicherort" placeholder="speicherort">
+			    <span th:if="${#fields.hasErrors('speicherort')}" th:errors="*{speicherort}"></span>
+		    </div>
+		    
+		    <div>
+			    <label for="dateiname">Dateiname</label>
+			    <input type="text" th:field="*{dateiname}" id="dateiname" placeholder="dateiname">
+			    <span th:if="${#fields.hasErrors('dateiname')}" th:errors="*{dateiname}"></span>
+		    </div>
+		    
+		    <div>
+			    <label for="dateiendung">Dateiendung</label>
+			    <input type="text" th:field="*{dateiendung}" id="dateiendung" placeholder="dateiendung">
+			    <span th:if="${#fields.hasErrors('dateiendung')}" th:errors="*{dateiendung}"></span>
+		    </div>
+		    
+		    
+		    <input type="submit" value="Update">
+		    <input type="reset" value="Reset">
+		</form>
+
+		<a th:href="@{/}">Zurück zur Übersicht</a>
+		
 	</body>
 </html>

@@ -1,23 +1,19 @@
 package de.BibSoft.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 
-import jakarta.validation.Valid;
-
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import de.BibSoft.data.Book;
 import de.BibSoft.service.BookService;
+import jakarta.validation.Valid;
 
 
 @Controller
@@ -29,7 +25,6 @@ public class GreetingController {
 	
 	@GetMapping("/")
 	public String getIndex(){
-		bookService.saveBook(new Book("Speicherort","Buch Dateiname", "PDF"));
 		return "redirect:/greeting";
 	}
 	
@@ -37,22 +32,12 @@ public class GreetingController {
 	public String greeting(Model model) {
 		
 		model.addAttribute("greeting", "Hallo Welt!");
+		model.addAttribute("count", "Anzahl der Entitäten " + bookService.getBookRepoCount());
 		model.addAttribute("books", bookService.getAllBooks());
 		
 		return "index";
 		
 	}
-	
-	@GetMapping("/book/show")
-	public String showBook(Model model) {
-		
-		model.addAttribute("greeting", "Hallo Welt! Show Book");
-		model.addAttribute("titel", "Show Book");
-		model.addAttribute("book", new Book());
-		
-		return "book/show";
-	}
-	
 //-----------------------------------------------------------------------------
 	@GetMapping("/book/new")
 	public String newBook(Model model) {
@@ -75,16 +60,50 @@ public class GreetingController {
 	}
 
 //-----------------------------------------------------------------------------
-	
-	@PostMapping("/book/edit")
-	public String editBook(Model model) {
+	@GetMapping("/book/show/{id}")
+	public String showBook(@PathVariable("id") Long id, Model model) {
 		
-		model.addAttribute("greeting", "Hallo Welt! Edit");
-		model.addAttribute("book", new Book());
+		model.addAttribute("greeting", "Hallo Welt! Show Book");
+		model.addAttribute("titel", "Show Book");
+		
+		Book book = bookService.getBookById(id)
+			      .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+		
+		
+		model.addAttribute("book", book);
+		
+		return "book/show";
+	}
+	//---------------------------------------------------------------------------
+	@GetMapping("/book/edit/{id}")
+	public String editBook(@PathVariable("id") long id, Model model) {
+		
+		model.addAttribute("greeting", "Hallo Welt! Show Book");
+		model.addAttribute("titel", "Show Book");
+		
+		Book book = bookService.getBookById(id)
+			      .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+		
+		model.addAttribute("book", book);
 		
 		return "book/edit";
-		
 	}
+	
+	@PostMapping("/book/update/{id}")
+	public String updateUser(@PathVariable("id") long id, @Valid Book book, BindingResult result, Model model) {
+		
+		model.addAttribute("greeting", "Hallo Welt! Show Book");
+		model.addAttribute("titel", "Show Book");
+	    if (result.hasErrors()) {
+	    	book.setId(id);
+	        return "book/edit";
+	    }
+	        
+	    bookService.saveBook(book);
+	    
+	    return "redirect:/";
+	}
+	//---------------------------------------------------------------------------
 	
 	@GetMapping("/book/delete/{id}")
 	public String deleteBook(@PathVariable("id") Long id) {

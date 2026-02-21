@@ -14,6 +14,7 @@
 		
 		<h1>Form</h1>
 		<p th:text="${greeting}"/>
+		<p th:text="${count}"/>
 		
 		<table class="table table-striped table-hover">
 			<thead>
@@ -41,13 +42,13 @@
 					<td th:text="${book.dateiname}">Dateiname</td>
 					<td th:text="${book.dateiendung}">Dateiendung</td>
 					
-					<td><a href="/book/show/${book.id}">Anzeigen</a></td>
-					<td><a href="/book/edit">Bearbeiten</a></td>
+					<td><a th:href="@{/book/show/{id}(id=${book.id})}">Anzeigen</a></td>
+					<td><a th:href="@{/book/edit/{id}(id=${book.id})}">Bearbeiten</a></td>
 					<td><a th:href="@{/book/delete/{id}(id=${book.id})}">Löschen</a></td>
 				</tr>
 				
 				<tr>
-					<td><a href="/book/new">Neues Buch</a></td>
+					<td><a href="/">Neues Buch</a></td>
 				</tr>
 			</tbody>
 		</table>
