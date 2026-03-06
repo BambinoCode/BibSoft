@@ -35,6 +35,9 @@ public class GreetingController {
 		model.addAttribute("count", "Anzahl der Entitäten " + bookService.getBookRepoCount());
 		model.addAttribute("books", bookService.getAllBooks());
 		
+		model.addAttribute("Dateiendung", bookService.sortBookByDateiendung());
+		model.addAttribute("Speicherort", bookService.sortBookBySpeicherort());
+		
 		return "index";
 		
 	}

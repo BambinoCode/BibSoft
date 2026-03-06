@@ -1,6 +1,7 @@
 package de.BibSoft.service;
 
 import java.io.File;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,13 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import de.BibSoft.data.Book;
-import de.BibSoft.repository.BookRepository;
+import de.BibSoft.repository.IBookRepository;
 
 @Service
 public class BookService {
 	
 	@Autowired
-	private BookRepository bookRepo;
+	private IBookRepository bookRepo;
 
 	
 	public List<Book> getAllBooks(){
@@ -49,6 +50,25 @@ public class BookService {
 	public List<Book> getBookByDateiendung(String dateiendung) {
 		return bookRepo.findByDateiname(dateiendung);
 	}
+	
+	public HashSet<String> sortBookByDateiendung() {
+		HashSet<String> endung = new HashSet<String>();
+		
+		for (Book bookEndung : bookRepo.findAll()) {
+			endung.add(bookEndung.getDateiendung().replace(".", ""));
+		  }
+		return endung;
+	}
+	
+	public HashSet<String> sortBookBySpeicherort() {
+		HashSet<String> speicherort = new HashSet<String>();
+		
+		for (Book bookSpeicherort : bookRepo.findAll()) {
+			speicherort.add(bookSpeicherort.getSpeicherort());
+		}
+		return speicherort;
+	}
+	
 //-----------------------------------------------------------------------------
 	public void saveBook(Book book) {
 		bookRepo.save(book);

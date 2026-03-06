@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
  
 @Repository
-public interface BookRepository extends JpaRepository<Book, Long> {
+public interface IBookRepository extends JpaRepository<Book, Long> {
 	
 	Optional<Book> findById(Long id);
 	
@@ -17,5 +17,4 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 	List<Book> findBySpeicherortContaining(String speicherort);
 	
 	List<Book> findByDateiendung(String dateiendung);
-
 }
